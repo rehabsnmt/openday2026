@@ -39,18 +39,22 @@
         } from 'lucide-react';
 
         const App = () => {
-          const [activeMajor, setActiveMajor] = useState('VLTL');
+          const [activeMajor, setActiveMajor] = useState(() => {
+          const keys = ['VLTL', 'HĐTL', 'NNTL'];
+          const randomIndex = Math.floor(Math.random() * keys.length);
+          return keys[randomIndex];
+            });
           const [expandedSemester, setExpandedSemester] = useState(null);
           
           const [viewers, setViewers] = useState(1);
 
           useEffect(() => {
-            const initialViewers = Math.floor(Math.random() * 15) + 20;
+            const initialViewers = Math.floor(Math.random() * 15) + 55;
             setViewers(initialViewers);
 
             const interval = setInterval(() => {
               setViewers(prev => {
-                const change = Math.floor(Math.random() * 15) - 3;
+                const change = Math.floor(Math.random() * 5) - 3;
                 const newViewers = prev + change;
                 return newViewers < 1 ? 1 : newViewers;
               });
