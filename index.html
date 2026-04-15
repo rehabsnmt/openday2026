@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ môn Phục hồi chức năng</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "react": "https://esm.sh/react@18.2.0",
+                "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+                "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+        import React, { useState } from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { 
+          ChevronRight, 
+          BookOpen, 
+          Clock, 
+          Target,
+          Info
+        } from 'lucide-react';
+
+        const App = () => {
+          const [activeMajor, setActiveMajor] = useState('VLTL');
+          const [expandedSemester, setExpandedSemester] = useState(1);
+
+          const commonSubjects = {
+            y1_s1: [
+              { id: 1, name: "Tiếng Anh chuyên ngành", theory: 2, practice: 1 },
+              { id: 2, name: "Triết học Mác-Lênin", theory: 3, practice: 0 },
+              { id: 3, name: "Tin học ứng dụng", theory: 2, practice: 2 },
+              { id: 4, name: "Vật lý - Lý sinh", theory: 2, practice: 1 },
+              { id: 5, name: "Sinh học và Di truyền", theory: 2, practice: 0 },
+              { id: 6, name: "Giải phẫu - Sinh lý I", theory: 2, practice: 2 },
+              { id: 7, name: "Thực hành Giải phẫu - Sinh lý", theory: 0, practice: 2 },
+              { id: 8, name: "Hóa sinh", theory: 2, practice: 1 },
+            ],
+            y1_s2: [
+              { id: 9, name: "Kinh tế chính trị", theory: 2, practice: 0 },
+              { id: 10, name: "Chủ nghĩa xã hội khoa học", theory: 2, practice: 0 },
+              { id: 11, name: "Pháp luật đại cương", theory: 2, practice: 0 },
+              { id: 12, name: "Giới thiệu Vật lý trị liệu", theory: 1, practice: 1, tag: 'VLTL' },
+              { id: 13, name: "Giới thiệu Hoạt động trị liệu", theory: 1, practice: 1, tag: 'HĐTL' },
+              { id: 14, name: "Giới thiệu Ngôn ngữ trị liệu", theory: 1, practice: 1, tag: 'NNTL' },
+              { id: 15, name: "Giải phẫu chức năng", theory: 2, practice: 1 },
+              { id: 16, name: "Giải phẫu chức năng vùng đầu mặt cổ", theory: 2, practice: 0 },
+              { id: 17, name: "Dược lý - Dược lâm sàng", theory: 2, practice: 0 },
+              { id: 18, name: "Xác suất - Thống kê y học", theory: 2, practice: 1 },
+              { id: 19, name: "Bệnh học Nội khoa - Ngoại khoa", theory: 2, practice: 0 },
+              { id: 20, name: "Đạo đức nghề nghiệp - Tâm lý y học", theory: 2, practice: 0 },
+            ],
+            y2_s3: [
+              { id: 21, name: "Tư tưởng Hồ Chí Minh", theory: 2, practice: 0 },
+              { id: 22, name: "Dịch tễ học", theory: 2, practice: 0 },
+              { id: 23, name: "Điều dưỡng cơ bản - Cấp cứu ban đầu", theory: 2, practice: 1 },
+              { id: 24, name: "Lượng giá chức năng", theory: 2, practice: 1 },
+              { id: 25, name: "Sự phát triển ngôn ngữ và Khuyết tật hình thái trẻ nhỏ", theory: 3, practice: 2 },
+              { id: 26, name: "Khoa học vận động", theory: 2, practice: 1, tag: 'VLTL' },
+              { id: 27, name: "Viết ngữ học", theory: 2, practice: 1, tag: 'NNTL' },
+              { id: 28, name: "Khoa học thần kinh", theory: 2, practice: 1 },
+              { id: 29, name: "Quá trình phát triển con người", theory: 2, practice: 1, tag: 'HĐTL' },
+              { id: 30, name: "Quá trình phát triển và các dạng khuyết tật nhi khoa", theory: 2, practice: 1, tag: 'HĐTL' },
+              { id: 31, name: "Dinh dưỡng và An toàn thực phẩm", theory: 2, practice: 1 },
+            ]
+          };
+
+          const majors = {
+            VLTL: {
+              name: "Vật lý trị liệu",
+              color: "blue",
+              description: "Chuyên ngành sử dụng các tác nhân vật lý (nhiệt, điện, ánh sáng...) và các bài tập vận động để phục hồi chức năng cho người bệnh.",
+              curriculum: {
+                ...commonSubjects,
+                y2_s4: [
+                  { id: 32, name: "Lịch sử Đảng Cộng sản Việt Nam", theory: 2, practice: 0 },
+                  { id: 33, name: "Sức khỏe môi trường và Sức khỏe nghề nghiệp", theory: 2, practice: 1 },
+                  { id: 34, name: "Nghiên cứu khoa học - Thực hành dựa trên bằng chứng", theory: 2, practice: 1 },
+                  { id: 35, name: "Vận động trị liệu", theory: 4, practice: 3 },
+                  { id: 36, name: "Phương pháp trị liệu", theory: 3, practice: 2 },
+                  { id: 37, name: "Châm cứu hành sâu", theory: 2, practice: 1 },
+                  { id: 38, name: "Kỹ năng giáo dục đào tạo trong Vật lý trị liệu", theory: 1, practice: 0 },
+                ],
+                y3_s5: [
+                  { id: 45, name: "Thực tập lâm sàng Kỹ năng lượng giá", theory: 0, practice: 4 },
+                  { id: 46, name: "Vật lý trị liệu Cơ xương khớp cơ bản", theory: 3, practice: 2 },
+                  { id: 47, name: "Vật lý trị liệu Thần kinh cơ bản", theory: 3, practice: 2 },
+                  { id: 48, name: "Vật lý trị liệu Tim mạch - Hô hấp cơ bản", theory: 3, practice: 2 },
+                  { id: 49, name: "Vật lý trị liệu Nhi khoa", theory: 2, practice: 2 },
+                ],
+                y3_s6: [
+                  { id: 59, name: "Giáo dục liên ngành 1", theory: 1, practice: 0 },
+                  { id: 60, name: "Thực tập lâm sàng Kỹ năng can thiệp", theory: 0, practice: 4 },
+                  { id: 61, name: "Phục hồi chức năng dựa vào cộng đồng", theory: 2, practice: 1 },
+                  { id: 62, name: "Vật lý trị liệu cho bệnh lý không lây nhiễm", theory: 2, practice: 1 },
+                  { id: 63, name: "Vật lý trị liệu trong Thể thao", theory: 2, practice: 1 },
+                  { id: 64, name: "Vật lý trị liệu cho Bệnh lý phức tạp và truyền nhiễm", theory: 2, practice: 1 },
+                  { id: 65, name: "Vật lý trị liệu Cơ xương khớp nâng cao", theory: 2, practice: 1 },
+                ],
+                y4_s7: [
+                  { id: 73, name: "Thực tập lâm sàng các bệnh lý thường gặp", theory: 0, practice: 4 },
+                  { id: 74, name: "Thực tập lâm sàng các bệnh lý phức tạp", theory: 0, practice: 4 },
+                  { id: 75, name: "Thực hành y học chứng cứ trong Phục hồi chức năng", theory: 2, practice: 1 },
+                  { id: 76, name: "Vật lý trị liệu Thần kinh nâng cao", theory: 2, practice: 1 },
+                  { id: 77, name: "Vật lý trị liệu cho sức khỏe nhóm người bệnh đặc thù", theory: 2, practice: 1 },
+                ],
+                y4_s8: [
+                  { id: 81, name: "Giáo dục liên ngành 2", theory: 1, practice: 0 },
+                  { id: 82, name: "Khóa luận tốt nghiệp hoặc Học phần thay thế", theory: 7, practice: 4 },
+                  { id: 83, name: "Thực tập lâm sàng đa bối cảnh", theory: 0, practice: 3 },
+                  { id: 84, name: "Thực tế tốt nghiệp", theory: 0, practice: 4 },
+                  { id: 85, name: "Tổ chức và quản lý Khoa Vật lý trị liệu và Phục hồi chức năng", theory: 2, practice: 1 },
+                ]
+              }
+            },
+            HĐTL: {
+              name: "Hoạt động trị liệu",
+              color: "orange",
+              description: "Giúp người bệnh cải thiện các kỹ năng tự chăm sóc, làm việc và giải trí để họ có thể sống độc lập hơn.",
+              curriculum: {
+                ...commonSubjects,
+                y2_s4: [
+                  { id: 32, name: "Lịch sử Đảng Cộng sản Việt Nam", theory: 2, practice: 0 },
+                  { id: 33, name: "Sức khỏe môi trường và Sức khỏe nghề nghiệp", theory: 2, practice: 1 },
+                  { id: 34, name: "Nghiên cứu khoa học - Thực hành dựa trên bằng chứng", theory: 2, practice: 1 },
+                  { id: 39, name: "Nguyên lý và kỹ năng cơ bản Hoạt động trị liệu I", theory: 4, practice: 2 },
+                  { id: 40, name: "Nguyên lý và kỹ năng cơ bản Hoạt động trị liệu II", theory: 3, practice: 1 },
+                  { id: 41, name: "Can thiệp Hoạt động trị liệu I", theory: 3, practice: 2 },
+                ],
+                y3_s5: [
+                  { id: 45, name: "Thực tập lâm sàng Kỹ năng lượng giá", theory: 0, practice: 4 },
+                  { id: 50, name: "Bệnh học Chỉnh hình - Nhi khoa - Tâm thần", theory: 3, practice: 1 },
+                  { id: 51, name: "Can thiệp Hoạt động trị liệu II", theory: 3, practice: 2 },
+                  { id: 52, name: "Hoạt động trị liệu Nhi khoa", theory: 4, practice: 2 },
+                  { id: 53, name: "Tâm lý lâm sàng và Xã hội học", theory: 2, practice: 1 },
+                ],
+                y3_s6: [
+                  { id: 59, name: "Giáo dục liên ngành 1", theory: 1, practice: 0 },
+                  { id: 60, name: "Thực tập lâm sàng Kỹ năng can thiệp", theory: 0, practice: 4 },
+                  { id: 61, name: "Phục hồi chức năng dựa vào cộng đồng", theory: 2, practice: 1 },
+                  { id: 66, name: "Hoạt động trị liệu trong bệnh lý Thần kinh", theory: 3, practice: 2 },
+                  { id: 67, name: "Hoạt động trị liệu trong ngoại khoa và Chỉnh hình", theory: 3, practice: 2 },
+                  { id: 68, name: "Hoạt động trị liệu trong sức khỏe tâm thần", theory: 3, practice: 2 },
+                ],
+                y4_s7: [
+                  { id: 73, name: "Thực tập lâm sàng các bệnh lý thường gặp", theory: 0, practice: 4 },
+                  { id: 74, name: "Thực tập lâm sàng các bệnh lý phức tạp", theory: 0, practice: 4 },
+                  { id: 75, name: "Thực hành y học chứng cứ trong Phục hồi chức năng", theory: 2, practice: 1 },
+                  { id: 78, name: "Hoạt động trị liệu trong Lão khoa và Nội khoa", theory: 4, practice: 2 },
+                ],
+                y4_s8: [
+                  { id: 81, name: "Giáo dục liên ngành 2", theory: 1, practice: 0 },
+                  { id: 82, name: "Khóa luận tốt nghiệp hoặc Học phần thay thế", theory: 7, practice: 4 },
+                  { id: 83, name: "Thực tập lâm sàng đa bối cảnh", theory: 0, practice: 3 },
+                  { id: 84, name: "Thực tế tốt nghiệp", theory: 0, practice: 4 },
+                  { id: 86, name: "Thực hành nghề nghiệp Hoạt động trị liệu", theory: 2, practice: 1 },
+                ]
+              }
+            },
+            NNTL: {
+              name: "Ngôn ngữ trị liệu",
+              color: "emerald",
+              description: "Chẩn đoán và điều trị các vấn đề về giao tiếp, ngôn ngữ, giọng nói, lưu loát và các rối loạn về nuốt.",
+              curriculum: {
+                ...commonSubjects,
+                y2_s4: [
+                  { id: 32, name: "Lịch sử Đảng Cộng sản Việt Nam", theory: 2, practice: 0 },
+                  { id: 33, name: "Sức khỏe môi trường và Sức khỏe nghề nghiệp", theory: 2, practice: 1 },
+                  { id: 34, name: "Nghiên cứu khoa học - Thực hành dựa trên bằng chứng", theory: 2, practice: 1 },
+                  { id: 42, name: "Rối loạn ngôn ngữ và giao tiếp nhận thức nguồn gốc thần kinh", theory: 4, practice: 2 },
+                  { id: 43, name: "Rối loạn âm lời nói", theory: 3, practice: 2 },
+                  { id: 44, name: "Khuyết tật giao tiếp suốt đời và Giao tiếp tăng cường - thay thế", theory: 3, practice: 2 },
+                ],
+                y3_s5: [
+                  { id: 45, name: "Thực tập lâm sàng Kỹ năng lượng giá", theory: 0, practice: 4 },
+                  { id: 54, name: "Giới thiệu các kỹ năng lâm sàng trong Ngôn ngữ trị liệu", theory: 2, practice: 1 },
+                  { id: 55, name: "Giọng và các rối loạn về giọng", theory: 2, practice: 1 },
+                  { id: 56, name: "Rối loạn nuốt", theory: 4, practice: 2 },
+                  { id: 57, name: "Rối loạn vận động tạo lời nói", theory: 2, practice: 1 },
+                  { id: 58, name: "Lưu loát vùng đầu và mặt cổ", theory: 2, practice: 1 },
+                ],
+                y3_s6: [
+                  { id: 59, name: "Giáo dục liên ngành 1", theory: 1, practice: 0 },
+                  { id: 60, name: "Thực tập lâm sàng Kỹ năng can thiệp", theory: 0, practice: 4 },
+                  { id: 61, name: "Phục hồi chức năng dựa vào cộng đồng", theory: 2, practice: 1 },
+                  { id: 69, name: "Thính học và Phục hồi chức năng thính giác", theory: 3, practice: 1 },
+                  { id: 70, name: "Rối loạn ngôn ngữ và đọc viết ở trẻ em tuổi đi học", theory: 3, practice: 1 },
+                  { id: 71, name: "Nói lắp", theory: 2, practice: 1 },
+                  { id: 72, name: "Cho trẻ ăn", theory: 2, practice: 1 },
+                ],
+                y4_s7: [
+                  { id: 73, name: "Thực tập lâm sàng các bệnh lý thường gặp", theory: 0, practice: 4 },
+                  { id: 74, name: "Thực tập lâm sàng các bệnh lý phức tạp", theory: 0, practice: 4 },
+                  { id: 75, name: "Thực hành y học chứng cứ trong Phục hồi chức năng", theory: 2, practice: 1 },
+                  { id: 79, name: "Quản lý ca bệnh phức tạp", theory: 2, practice: 1 },
+                  { id: 80, name: "Thực hành chuyên nghiệp và các tiêu chuẩn đạo đức", theory: 2, practice: 1 },
+                ],
+                y4_s8: [
+                  { id: 81, name: "Giáo dục liên ngành 2", theory: 1, practice: 0 },
+                  { id: 82, name: "Khóa luận tốt nghiệp hoặc Học phần thay thế", theory: 7, practice: 4 },
+                  { id: 83, name: "Thực tập lâm sàng đa bối cảnh", theory: 0, practice: 3 },
+                  { id: 84, name: "Thực tế tốt nghiệp", theory: 0, practice: 4 },
+                  { id: 87, name: "Lãnh đạo và học tập suốt đời", theory: 2, practice: 1 },
+                ]
+              }
+            }
+          };
+
+          const currentCurriculum = majors[activeMajor].curriculum;
+
+          const semesters = [
+            { id: 1, title: "Năm 1 - Học kì I", key: 'y1_s1' },
+            { id: 2, title: "Năm 1 - Học kì II", key: 'y1_s2' },
+            { id: 3, title: "Năm 2 - Học kì III", key: 'y2_s3' },
+            { id: 4, title: "Năm 2 - Học kì IV", key: 'y2_s4' },
+            { id: 5, title: "Năm 3 - Học kì V", key: 'y3_s5' },
+            { id: 6, title: "Năm 3 - Học kì VI", key: 'y3_s6' },
+            { id: 7, title: "Năm 4 - Học kì VII", key: 'y4_s7' },
+            { id: 8, title: "Năm 4 - Học kì VIII", key: 'y4_s8' },
+          ];
+
+          const getColorClass = (color) => {
+            switch(color) {
+              case 'blue': return 'bg-blue-600 text-white';
+              case 'orange': return 'bg-orange-500 text-white';
+              case 'emerald': return 'bg-emerald-600 text-white';
+              default: return 'bg-gray-600 text-white';
+            }
+          };
+
+          const getBorderClass = (color) => {
+            switch(color) {
+              case 'blue': return 'border-blue-200';
+              case 'orange': return 'border-orange-200';
+              case 'emerald': return 'border-emerald-200';
+              default: return 'border-gray-200';
+            }
+          };
+
+          const getLightBgClass = (color) => {
+            switch(color) {
+              case 'blue': return 'bg-blue-50';
+              case 'orange': return 'bg-orange-50';
+              case 'emerald': return 'bg-emerald-50';
+              default: return 'bg-gray-50';
+            }
+          };
+
+          return (
+            <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-12">
+              <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+                <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-14 h-14 flex-shrink-0">
+                      <img 
+                        src="logo_Bộ môn.png" 
+                        alt="Logo Bộ môn Phục hồi chức năng"
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://via.placeholder.com/60?text=Logo";
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="text-lg font-bold leading-tight hidden md:block text-blue-800">
+                        BỘ MÔN PHỤC HỒI CHỨC NĂNG
+                      </h1>
+                      <p className="text-xs text-gray-500 hidden md:block">Đại học Y Dược TP. Hồ Chí Minh</p>
+                      <h1 className="text-sm font-bold md:hidden text-blue-800">BM. PHỤC HỒI CHỨC NĂNG</h1>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    {Object.keys(majors).map(key => (
+                      <button
+                        key={key}
+                        onClick={() => setActiveMajor(key)}
+                        className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-medium transition-all shadow-sm ${
+                          activeMajor === key 
+                            ? getColorClass(majors[key].color)
+                            : 'bg-gray-50 text-gray-600 hover:bg-gray-200 border border-gray-100'
+                        }`}
+                      >
+                        {majors[key].name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </header>
+
+              <main className="max-w-4xl mx-auto px-4 mt-8">
+                {/* Phần giới thiệu ngành học đã được cập nhật icon thành logo bộ môn */}
+                <section className={`p-6 rounded-2xl mb-8 border-2 ${getBorderClass(majors[activeMajor].color)} ${getLightBgClass(majors[activeMajor].color)} shadow-sm relative overflow-hidden group`}>
+                  {/* Logo in chìm phía góc phải */}
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                     <img src="logo_Bộ môn.png" alt="Background Logo" className="w-16 h-16 object-contain grayscale" />
+                  </div>
+                  
+                  <div className="flex flex-col md:flex-row items-start gap-4 relative z-10">
+                    {/* Logo bộ môn thay thế cho icon cũ */}
+                    <div className={`p-3 rounded-2xl shadow-lg bg-white flex-shrink-0 border-2 ${getBorderClass(majors[activeMajor].color)}`}>
+                      <img 
+                        src="logo_Bộ môn.png" 
+                        alt="Logo Bộ môn" 
+                        className="w-10 h-10 object-contain"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://via.placeholder.com/40?text=Logo";
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold mb-2 text-gray-800">Ngành {majors[activeMajor].name}</h2>
+                      <p className="text-gray-600 leading-relaxed mb-4 italic text-sm md:text-base">"{majors[activeMajor].description}"</p>
+                      <div className="flex flex-wrap gap-4 text-sm">
+                        <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full border shadow-sm">
+                          <Clock className="w-4 h-4 text-gray-400" />
+                          <span>Đào tạo: 4 năm (8 học kỳ)</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full border shadow-sm">
+                          <Target className="w-4 h-4 text-gray-400" />
+                          <span>Tổng khối lượng: 138 tín chỉ</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
+                    <h3 className="text-lg font-bold flex items-center gap-2">
+                      <BookOpen className="w-5 h-5 text-blue-600" />
+                      Khung Chương Trình Học Chi Tiết
+                    </h3>
+                    <span className="text-[10px] md:text-xs text-gray-500 bg-white border px-2 py-1 rounded-full italic shadow-sm">
+                      *Nhấp vào tên học kỳ để xem danh sách môn học
+                    </span>
+                  </div>
+
+                  {semesters.map((sem) => {
+                    const subjects = currentCurriculum[sem.key]?.filter(sub => !sub.tag || sub.tag === activeMajor) || [];
+                    const isOpen = expandedSemester === sem.id;
+                    
+                    return (
+                      <div 
+                        key={sem.id} 
+                        className={`bg-white rounded-xl border transition-all overflow-hidden ${
+                          isOpen ? `ring-2 ${getBorderClass(majors[activeMajor].color)} shadow-md` : 'hover:border-gray-300 shadow-sm'
+                        }`}
+                      >
+                        <button 
+                          onClick={() => setExpandedSemester(isOpen ? null : sem.id)}
+                          className="w-full px-5 py-4 flex items-center justify-between text-left"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
+                              isOpen ? getColorClass(majors[activeMajor].color) : 'bg-gray-100 text-gray-500'
+                            }`}>
+                              {sem.id}
+                            </div>
+                            <span className={`font-semibold ${isOpen ? 'text-gray-900' : 'text-gray-600'}`}>{sem.title}</span>
+                          </div>
+                          <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? 'rotate-90' : ''}`} />
+                        </button>
+
+                        {isOpen && (
+                          <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div className="overflow-x-auto">
+                              <table className="w-full text-sm">
+                                <thead>
+                                  <tr className="text-gray-400 border-b text-left">
+                                    <th className="py-2 font-medium w-12">STT</th>
+                                    <th className="py-2 font-medium">Tên học phần đầy đủ</th>
+                                    <th className="py-2 font-medium text-center">Tín chỉ</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="divide-y">
+                                  {subjects.map((sub, idx) => (
+                                    <tr key={sub.id} className="group hover:bg-gray-50 transition-colors">
+                                      <td className="py-3 text-gray-400">{idx + 1}</td>
+                                      <td className="py-3 font-medium text-gray-800">{sub.name}</td>
+                                      <td className="py-3 text-center text-gray-600">{sub.theory + sub.practice}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                            
+                            <div className={`mt-4 p-3 rounded-lg flex flex-col sm:flex-row items-center justify-between text-xs gap-2 ${getLightBgClass(majors[activeMajor].color)}`}>
+                               <div className="flex items-center gap-1.5 text-gray-700">
+                                 <Info className="w-4 h-4" />
+                                 <span>Dự kiến: <strong>{subjects.reduce((acc, curr) => acc + curr.theory + curr.practice, 0)}</strong> tín chỉ cho học kỳ này.</span>
+                               </div>
+                               <div className="text-gray-400 italic">
+                                 *Dữ liệu dựa trên khung đào tạo năm học 2024
+                               </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </main>
+
+              <footer className="max-w-4xl mx-auto px-4 mt-12 text-center border-t pt-8 pb-12">
+                <p className="text-gray-500 text-sm mb-4 font-medium uppercase tracking-wider">Chọn ngành học để tìm hiểu lộ trình</p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {Object.keys(majors).map(key => (
+                    <button
+                      key={key}
+                      onClick={() => {
+                        setActiveMajor(key);
+                        setExpandedSemester(1);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className={`flex items-center gap-2 px-6 py-3 rounded-2xl border-2 transition-all hover:scale-105 active:scale-95 text-sm shadow-sm ${
+                        activeMajor === key 
+                          ? `${getBorderClass(majors[key].color)} ${getLightBgClass(majors[key].color)} font-bold text-gray-900`
+                          : 'bg-white border-gray-100 text-gray-400'
+                      }`}
+                    >
+                      {majors[key].name}
+                    </button>
+                  ))}
+                </div>
+                <div className="mt-12 flex flex-col items-center gap-4">
+                  <img src="logo_Bộ môn.png" alt="Logo Bộ môn" className="h-20 opacity-90 drop-shadow-sm" />
+                  <div className="text-[10px] md:text-xs text-gray-400 max-w-md leading-relaxed">
+                    Bộ môn Phục hồi chức năng, Trường Điều dưỡng - Kỹ thuật y học, Đại học Y Dược Thành Phố Hồ Chí Minh.
+                    <br />Số 201 Nguyễn Chí Thanh, Quận 5, TP. HCM.
+                  </div>
+                </div>
+              </footer>
+            </div>
+          );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
