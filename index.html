@@ -9,15 +9,13 @@
     
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-   <script type="importmap">
+    <script type="importmap">
         {
             "imports": {
                 "react": "https://esm.sh/react@18.2.0",
                 "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
                 "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react&bundle"
             }
-        }
-    </script>
         }
     </script>
 </head>
@@ -42,27 +40,23 @@
           const [activeMajor, setActiveMajor] = useState('VLTL');
           const [expandedSemester, setExpandedSemester] = useState(null);
           
-          // Khởi tạo state cho số người đang xem (mô phỏng)
           const [viewers, setViewers] = useState(1);
 
           useEffect(() => {
-            // Lần đầu vào trang, random một số từ 40 đến 55
             const initialViewers = Math.floor(Math.random() * 15) + 40;
             setViewers(initialViewers);
 
-            // Mỗi 5 giây sẽ cập nhật lại số người xem (dao động tăng giảm 1-2 người)
             const interval = setInterval(() => {
               setViewers(prev => {
-                const change = Math.floor(Math.random() * 3) - 1; // Tạo ra -1, 0, hoặc 1
+                const change = Math.floor(Math.random() * 3) - 1;
                 const newViewers = prev + change;
-                return newViewers < 1 ? 1 : newViewers; // Đảm bảo số người xem luôn >= 1
+                return newViewers < 1 ? 1 : newViewers;
               });
             }, 5000);
 
             return () => clearInterval(interval);
           }, []);
 
-          // Cập nhật Database theo khung chương trình 2025
           const curriculumDatabase = {
             y1_s1: [
               { id: 1, name: "Tiếng Anh chuyên ngành", theory: 1, practice: 1 },
@@ -174,21 +168,18 @@
               name: "Vật lý trị liệu",
               color: "blue",
               description: "Vật lý trị liệu là ngành thuộc lĩnh vực khoa học sức khỏe, tập trung vào việc phát triển, duy trì và phục hồi tối đa khả năng vận động và chức năng của con người trong suốt vòng đời. Vật lý trị liệu phục vụ cá nhân và cộng đồng, đặc biệt trong những trường hợp vận động và chức năng bị ảnh hưởng bởi tuổi tác, chấn thương, đau, bệnh lý, rối loạn, tình trạng sức khỏe hoặc các yếu tố môi trường.",
-              // Danh sách ảnh của nhánh PT
               images: ['PT/1.jpg', 'PT/2.jpg', 'PT/3.jpg', 'PT/4.jpg', 'PT/5.jpg']
             },
             HĐTL: {
               name: "Hoạt động trị liệu",
               color: "orange",
               description: "Hoạt động trị liệu là ngành hỗ trợ người bệnh/khách hàng phát triển, phục hồi hoặc duy trì khả năng thực hiện và tham gia vào các hoạt động hằng ngày có ý nghĩa thông qua đánh giá, can thiệp, huấn luyện kỹ năng, điều chỉnh hoạt động và thích nghi môi trường, nhằm nâng cao tính độc lập và cải thiện chất lượng cuộc sống.",
-              // Danh sách ảnh của nhánh OT
               images: ['OT/1.jpg', 'OT/2.jpg', 'OT/3.jpg', 'OT/4.jpg', 'OT/5.jpg']
             },
             NNTL: {
               name: "Ngôn ngữ trị liệu",
               color: "emerald",
               description: "Ngôn ngữ trị liệu là ngành làm việc với trẻ em và người lớn nhằm sàng lọc, nhận diện, can thiệp, tư vấn, huấn luyện kỹ năng quản lý các vấn đề về ngôn ngữ, lời nói, giao tiếp và nuốt.",
-              // Danh sách ảnh của nhánh ST
               images: ['ST/1.jpg', 'ST/2.jpg', 'ST/3.jpg', 'ST/4.jpg', 'ST/5.jpg']
             }
           };
@@ -312,7 +303,6 @@
                   </div>
                 </div>
 
-                {/* Phần giới thiệu chuyên ngành & Băng chuyền hình ảnh (Carousel) */}
                 <section className={`p-6 rounded-2xl mb-8 border-2 ${getBorderClass(majors[activeMajor].color)} ${getLightBgClass(majors[activeMajor].color)} shadow-sm relative overflow-hidden group`}>
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
                      <img src="logo_Bộ môn.png" alt="Background Logo" className="w-16 h-16 object-contain grayscale" />
@@ -331,7 +321,7 @@
                       />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold mb-2 text-gray-800">Ngành {majors[activeMajor].name}</h2>
+                      <h2 className="text-2xl font-bold mb-2 text-gray-800">Chuyên ngành {majors[activeMajor].name}</h2>
                       <p className="text-gray-600 leading-relaxed mb-4 italic text-sm md:text-base">"{majors[activeMajor].description}"</p>
                       <div className="flex flex-wrap gap-4 text-sm">
                         <div className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full border shadow-sm">
@@ -346,15 +336,12 @@
                     </div>
                   </div>
 
-                  {/* THÊM MỚI: Băng chuyền hình ảnh auto scroll */}
                   <div className="mt-6 w-full overflow-hidden rounded-xl border border-white shadow-sm relative bg-white/50 py-3 backdrop-blur-sm">
                     <div className="flex items-center gap-2 mb-3 px-3">
                        <ImageIcon className={`w-4 h-4 ${activeMajor === 'VLTL' ? 'text-blue-500' : activeMajor === 'HĐTL' ? 'text-orange-500' : 'text-emerald-500'}`} />
-                       <span className="text-xs font-bold uppercase text-gray-500 tracking-wider">Hình ảnh hoạt động ngành</span>
+                       <span className="text-xs font-bold uppercase text-gray-500 tracking-wider">Hình ảnh hoạt động</span>
                     </div>
-                    {/* Băng chuyền chạy */}
                     <div className="animate-scroll flex w-max">
-                      {/* Nhân đôi mảng ảnh để tạo hiệu ứng lướt vô tận (seamless loop) */}
                       {[...activeImages, ...activeImages].map((imgSrc, idx) => (
                         <div key={idx} className="pr-3 flex-shrink-0">
                           <img 
@@ -362,7 +349,6 @@
                             alt={`Hoạt động ${majors[activeMajor].name}`} 
                             className="h-36 md:h-48 w-56 md:w-72 object-cover rounded-lg shadow-sm border border-gray-200 bg-gray-100"
                             onError={(e) => {
-                              // Nếu không tìm thấy file ảnh sẽ hiện khung xám giữ chỗ
                               e.target.onerror = null;
                               e.target.src = `https://via.placeholder.com/400x300?text=${majors[activeMajor].name}+${(idx % 5) + 1}`;
                             }}
@@ -500,18 +486,15 @@
         scrollbar-width: none;
       }
       
-      /* Animation lướt ngang vô tận cho ảnh */
       @keyframes scroll {
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); } 
-        /* Cần translateX(-50%) vì trong code mình nhân đôi mảng ảnh lên gấp đôi chiều dài */
       }
       
       .animate-scroll {
         animation: scroll 25s linear infinite;
       }
       
-      /* Tạm dừng lướt khi người dùng trỏ chuột hoặc nhấn giữ trên điện thoại */
       .animate-scroll:hover, 
       .animate-scroll:active {
         animation-play-state: paused;
