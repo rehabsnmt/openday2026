@@ -31,7 +31,8 @@
           Clock, 
           Target,
           Info,
-          Users
+          Users,
+          GraduationCap
         } from 'lucide-react';
 
         const App = () => {
@@ -42,11 +43,11 @@
           const [viewers, setViewers] = useState(1);
 
           useEffect(() => {
-            // Lần đầu vào trang, random một số từ 15 đến 55
+            // Lần đầu vào trang, random một số từ 40 đến 55
             const initialViewers = Math.floor(Math.random() * 15) + 40;
             setViewers(initialViewers);
 
-            // Mỗi 5 - 8 giây sẽ cập nhật lại số người xem (dao động tăng giảm 1-2 người)
+            // Mỗi 5 giây sẽ cập nhật lại số người xem (dao động tăng giảm 1-2 người)
             const interval = setInterval(() => {
               setViewers(prev => {
                 const change = Math.floor(Math.random() * 3) - 1; // Tạo ra -1, 0, hoặc 1
@@ -91,7 +92,7 @@
               { id: 24, name: "Lượng giá chức năng", theory: 1, practice: 1, tags: ['VLTL', 'HĐTL'] },
               { id: 25, name: "Sự phát triển ngôn ngữ & giao tiếp nhận thức ở trẻ nhỏ", theory: 1, practice: 1, tags: ['NNTL'] },
               { id: 26, name: "Khoa học vận động", theory: 1, practice: 1, tags: ['VLTL', 'HĐTL'] },
-              { id: 27, name: "Việt ngữ học", theory: 1, practice: 1, tags: ['NNTL'] },
+              { id: 27, name: "Viết ngữ học", theory: 1, practice: 1, tags: ['NNTL'] },
               { id: 28, name: "Khoa học thần kinh", theory: 1, practice: 1 },
               { id: 29, name: "Quá trình phát triển con người", theory: 1, practice: 1, tags: ['VLTL', 'HĐTL'] },
               { id: 30, name: "Quá trình phát triển và sử dụng giao tiếp suốt đời", theory: 1, practice: 1, tags: ['NNTL'] },
@@ -169,17 +170,17 @@
             VLTL: {
               name: "Vật lý trị liệu",
               color: "blue",
-              description: "Sử dụng các phương pháp trị liệu (thông qua trị liệu bằng tay, các bài tập chọn lọc, các tác nhân điện hay vật lý khác) nhằm mục tiêu nâng cao sức khỏe, phòng ngừa các yếu tố nguy cơ liên quan đến vận động, điều trị/can thiệp, phục hồi chức năng sau chấn thương, bệnh lý hoặc điều chỉnh và thích nghi các khiếm khuyết của cơ thể."
+              description: "Vật lý trị liệu là ngành thuộc lĩnh vực khoa học sức khỏe, tập trung vào việc phát triển, duy trì và phục hồi tối đa khả năng vận động và chức năng của con người trong suốt vòng đời. Vật lý trị liệu phục vụ cá nhân và cộng đồng, đặc biệt trong những trường hợp vận động và chức năng bị ảnh hưởng bởi tuổi tác, chấn thương, đau, bệnh lý, rối loạn, tình trạng sức khỏe hoặc các yếu tố môi trường."
             },
             HĐTL: {
               name: "Hoạt động trị liệu",
               color: "orange",
-              description: "Hỗ trợ người bệnh/khách hàng phát triển, phục hồi hoặc duy trì khả năng thực hiện và tham gia vào các hoạt động hằng ngày có ý nghĩa thông qua đánh giá, can thiệp, huấn luyện kỹ năng, điều chỉnh hoạt động và thích nghi môi trường, nhằm nâng cao tính độc lập và cải thiện chất lượng cuộc sống."
+              description: "Hoạt động trị liệu là ngành hỗ trợ người bệnh/khách hàng phát triển, phục hồi hoặc duy trì khả năng thực hiện và tham gia vào các hoạt động hằng ngày có ý nghĩa thông qua đánh giá, can thiệp, huấn luyện kỹ năng, điều chỉnh hoạt động và thích nghi môi trường, nhằm nâng cao tính độc lập và cải thiện chất lượng cuộc sống."
             },
             NNTL: {
               name: "Ngôn ngữ trị liệu",
               color: "emerald",
-              description: "Sàng lọc, nhận diện, can thiệp, tư vấn, huấn luyện kỹ năng quản lý các vấn đề về ngôn ngữ, lời nói, giao tiếp và nuốt."
+              description: "Ngôn ngữ trị liệu là ngành làm việc với trẻ em và người lớn nhằm sàng lọc, nhận diện, can thiệp, tư vấn, huấn luyện kỹ năng quản lý các vấn đề về ngôn ngữ, lời nói, giao tiếp và nuốt."
             }
           };
 
@@ -246,7 +247,7 @@
                       </div>
                     </div>
 
-                    {/* Badge hiển thị số người xem trên mobile sẽ nằm ở đây */}
+                    {/* Badge hiển thị số người xem trên mobile */}
                     <div className="md:hidden flex items-center gap-1.5 text-[10px] font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
                       <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -271,7 +272,7 @@
                       </button>
                     ))}
 
-                    {/* Badge hiển thị số người xem trên máy tính sẽ nằm ở đây */}
+                    {/* Badge hiển thị số người xem trên máy tính */}
                     <div className="hidden md:flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100 ml-4">
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -285,6 +286,25 @@
               </header>
 
               <main className="max-w-4xl mx-auto px-4 mt-8">
+                
+                {/* BANNER THÔNG TIN TUYỂN SINH MỚI THÊM VÀO */}
+                <div className="bg-gradient-to-r from-blue-50 to-white border border-blue-200 rounded-2xl p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+                  <div className="flex items-center gap-4">
+                    <div className="bg-blue-600 p-3 rounded-xl text-white shadow-md flex-shrink-0">
+                      <GraduationCap className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider mb-1">Thông tin đăng ký nguyện vọng</div>
+                      <div className="font-extrabold text-blue-900 text-lg md:text-xl">KỸ THUẬT PHỤC HỒI CHỨC NĂNG</div>
+                    </div>
+                  </div>
+                  <div className="bg-white px-5 py-2.5 rounded-xl border-2 border-blue-100 shadow-sm text-center min-w-[150px] w-full sm:w-auto">
+                    <div className="text-xs text-gray-500 font-bold mb-1">MÃ NGÀNH</div>
+                    <div className="font-black text-blue-700 text-lg tracking-[0.2em]">7720603</div>
+                  </div>
+                </div>
+
+                {/* Phần giới thiệu chuyên ngành */}
                 <section className={`p-6 rounded-2xl mb-8 border-2 ${getBorderClass(majors[activeMajor].color)} ${getLightBgClass(majors[activeMajor].color)} shadow-sm relative overflow-hidden group`}>
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
                      <img src="logo_Bộ môn.png" alt="Background Logo" className="w-16 h-16 object-contain grayscale" />
@@ -403,7 +423,7 @@
               </main>
 
               <footer className="max-w-4xl mx-auto px-4 mt-12 text-center border-t pt-8 pb-12">
-                <p className="text-gray-500 text-sm mb-4 font-medium uppercase tracking-wider">Chọn ngành học để tìm hiểu lộ trình</p>
+                <p className="text-gray-500 text-sm mb-4 font-medium uppercase tracking-wider">Chọn ngành để tìm hiểu lộ trình</p>
                 <div className="flex flex-wrap justify-center gap-3">
                   {Object.keys(majors).map(key => (
                     <button
