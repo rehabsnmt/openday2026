@@ -43,16 +43,16 @@
           const [viewers, setViewers] = useState(1);
 
           useEffect(() => {
-            const initialViewers = Math.floor(Math.random() * 15) + 40;
+            const initialViewers = Math.floor(Math.random() * 55) + 40;
             setViewers(initialViewers);
 
             const interval = setInterval(() => {
               setViewers(prev => {
-                const change = Math.floor(Math.random() * 3) - 1;
+                const change = Math.floor(Math.random() * 15) - 3;
                 const newViewers = prev + change;
                 return newViewers < 1 ? 1 : newViewers;
               });
-            }, 5000);
+            }, 3000);
 
             return () => clearInterval(interval);
           }, []);
