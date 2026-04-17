@@ -63,7 +63,7 @@
 
             const interval = setInterval(() => {
               setViewers(prev => {
-                const change = Math.floor(Math.random() * 5) - 3;
+                const change = Math.floor(Math.random() * 5) - 1;
                 const newViewers = prev + change;
                 return newViewers < 1 ? 1 : newViewers;
               });
