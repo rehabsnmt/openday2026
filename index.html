@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5ZFRSKFJ4"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5ZFRSKFJ4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -44,7 +43,8 @@
           Info,
           Users,
           GraduationCap,
-          Image as ImageIcon
+          Image as ImageIcon,
+          Briefcase 
         } from 'lucide-react';
 
         const App = () => {
@@ -183,19 +183,41 @@
               name: "Vật lý trị liệu",
               color: "blue",
               description: "Vật lý trị liệu là ngành thuộc lĩnh vực khoa học sức khỏe, tập trung vào việc phát triển, duy trì và phục hồi tối đa khả năng vận động và chức năng của con người trong suốt vòng đời. Vật lý trị liệu phục vụ cá nhân và cộng đồng, đặc biệt trong những trường hợp vận động và chức năng bị ảnh hưởng bởi tuổi tác, chấn thương, đau, bệnh lý, rối loạn, tình trạng sức khỏe hoặc các yếu tố môi trường.",
-              images: ['PT/1.jpg', 'PT/2.jpg', 'PT/3.jpg', 'PT/4.jpg', 'PT/5.jpg']
+              images: ['PT/1.jpg', 'PT/2.jpg', 'PT/3.jpg', 'PT/4.jpg', 'PT/5.jpg'],
+              jobs: [
+                "Làm việc tại các bệnh viện, trung tâm phục hồi chức năng, viện dưỡng lão.",
+                "Tự phát triển và vận hành các cơ sở kỹ thuật phục hồi chức năng tư nhân.",
+                "Làm cán bộ của các dự án liên quan phục hồi chức năng ở các tổ chức phi chính phủ.",
+                "Trung tâm thể dục thể thao, cơ sở kinh doanh thiết bị vật lý trị liệu.",
+              ]
             },
             HĐTL: {
               name: "Hoạt động trị liệu",
               color: "orange",
               description: "Hoạt động trị liệu là ngành hỗ trợ người bệnh/khách hàng phát triển, phục hồi hoặc duy trì khả năng thực hiện và tham gia vào các hoạt động hằng ngày có ý nghĩa thông qua đánh giá, can thiệp, huấn luyện kỹ năng, điều chỉnh hoạt động và thích nghi môi trường, nhằm nâng cao tính độc lập và cải thiện chất lượng cuộc sống.",
-              images: ['OT/1.jpg', 'OT/2.jpg', 'OT/3.jpg', 'OT/4.jpg', 'OT/5.jpg']
+              images: ['OT/1.jpg', 'OT/2.jpg', 'OT/3.jpg', 'OT/4.jpg', 'OT/5.jpg'],
+              jobs: [
+                "Làm việc tại các bệnh viện, trung tâm phục hồi chức năng, viện dưỡng lão.",
+                "Tự phát triển và vận hành các cơ sở kỹ thuật phục hồi chức năng tư nhân.",
+                "Làm cán bộ của các dự án liên quan phục hồi chức năng ở các tổ chức phi chính phủ.",
+                "Trung tâm giáo dục hòa nhập, nhà máy xí nghiệp (chăm sóc sức khỏe lao động).",
+                "Trường học từ mẫu giáo đến trung học phổ thông.",
+                "Công ty sản xuất trang thiết bị công thái học hoặc dụng cụ thích nghi/trợ giúp.",
+              ]
             },
             NNTL: {
               name: "Ngôn ngữ trị liệu",
               color: "emerald",
               description: "Ngôn ngữ trị liệu là ngành làm việc với trẻ em và người lớn nhằm sàng lọc, nhận diện, can thiệp, tư vấn, huấn luyện kỹ năng quản lý các vấn đề về ngôn ngữ, lời nói, giao tiếp và nuốt.",
-              images: ['ST/1.jpg', 'ST/2.jpg', 'ST/3.jpg', 'ST/4.jpg', 'ST/5.jpg']
+              images: ['ST/1.jpg', 'ST/2.jpg', 'ST/3.jpg', 'ST/4.jpg', 'ST/5.jpg'],
+              jobs: [
+                "Làm việc tại các bệnh viện, trung tâm phục hồi chức năng, viện dưỡng lão.",
+                "Tự phát triển và vận hành các cơ sở kỹ thuật phục hồi chức năng tư nhân.",
+                "Làm cán bộ của các dự án liên quan phục hồi chức năng ở các tổ chức phi chính phủ.",
+                "Trung tâm giáo dục hòa nhập.",
+                "Trường học từ mẫu giáo đến trung học phổ thông.",
+                "Công ty sản xuất trang thiết bị trợ thính hoặc công nghệ trợ giúp giao tiếp hoặc nuốt.",
+              ]
             }
           };
 
@@ -238,6 +260,7 @@
           };
 
           const activeImages = majors[activeMajor].images;
+          const activeJobs = majors[activeMajor].jobs;
 
           return (
             <div className="min-h-screen bg-gray-50 text-gray-900 font-sans pb-12 overflow-x-hidden">
@@ -297,7 +320,6 @@
                     * Sinh viên được chọn 1 trong 3 lựa chọn
                   </div>
                   
-                  {/* Grid chia đều 3 cột, không rớt dòng */}
                   <div className="grid grid-cols-3 gap-1.5 md:gap-3 w-full max-w-2xl mx-auto">
                     {Object.keys(majors).map(key => (
                       <button
@@ -373,6 +395,26 @@
                     </div>
                   </div>
                 </section>
+
+                <div className={`p-5 sm:p-6 rounded-2xl mb-8 border border-gray-200 bg-white shadow-sm transition-colors duration-300`}>
+                  <div className="flex items-center gap-3 mb-5 border-b pb-4">
+                    <div className={`p-2.5 rounded-xl ${getColorClass(majors[activeMajor].color)} shadow-sm`}>
+                      <Briefcase className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-800">Cơ hội việc làm sau tốt nghiệp</h3>
+                  </div>
+                  
+                  <div className="pl-2">
+                    <ul className="space-y-3">
+                      {activeJobs.map((job, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${getColorClass(majors[activeMajor].color).split(' ')[0]}`}></span>
+                          <span className="text-gray-700 text-sm md:text-base leading-relaxed">{job}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
 
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
