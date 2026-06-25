@@ -2,13 +2,12 @@
 <html lang="vi">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B5ZFRSKFJ4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-B5ZFRSKFJ4');
-</script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B5ZFRSKFJ4');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bộ môn Phục hồi chức năng</title>
@@ -23,6 +22,7 @@
         {
             "imports": {
                 "react": "https://esm.sh/react@18.2.0",
+                "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
                 "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
                 "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react&bundle"
             }
@@ -32,7 +32,7 @@
 <body>
     <div id="root"></div>
 
-    <script type="text/babel" data-type="module">
+    <script type="text/babel" data-presets="react,env" data-type="module">
         import React, { useState, useEffect } from 'react';
         import { createRoot } from 'react-dom/client';
         import { 
@@ -46,15 +46,15 @@
           Image as ImageIcon,
           Briefcase,
           ExternalLink,
-          Facebook // Đã thêm icon Facebook cho nút nổi
+          Facebook
         } from 'lucide-react';
 
         const App = () => {
           const [activeMajor, setActiveMajor] = useState(() => {
-          const keys = ['VLTL', 'HĐTL', 'NNTL'];
-          const randomIndex = Math.floor(Math.random() * keys.length);
-          return keys[randomIndex];
-            });
+            const keys = ['VLTL', 'HĐTL', 'NNTL'];
+            const randomIndex = Math.floor(Math.random() * keys.length);
+            return keys[randomIndex];
+          });
           const [expandedSemester, setExpandedSemester] = useState(null);
           
           const [viewers, setViewers] = useState(1);
